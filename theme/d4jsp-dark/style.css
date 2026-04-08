@@ -1,0 +1,426 @@
+/*
+Theme Name: D4JSP Dark
+Theme URI: https://d4jsp.org
+Author: The Cow King
+Author URI: https://d4jsp.org
+Description: Gothic medieval dark theme for the D4JSP Diablo 4 trading network.
+Version: 1.0.0
+Requires at least: 6.0
+Tested up to: 6.7
+Requires PHP: 8.0
+License: Private
+Text Domain: d4jsp-dark
+Tags: dark, gaming, medieval, gothic
+*/
+
+/* ===================================================
+   DESIGN TOKENS - D4JSP Gothic Dark System
+=================================================== */
+:root {
+  /* Backgrounds */
+  --bg-root:       #080608;
+  --bg-card:       #0e0c10;
+  --bg-card-alt:   #141218;
+  --bg-overlay:    rgba(8,6,8,0.85);
+
+  /* Borders */
+  --border:        #2a2535;
+  --border-glow:   rgba(212,175,55,0.3);
+
+  /* Gold accent */
+  --gold:          #D4AF37;
+  --gold-dark:     #B8860B;
+  --gold-muted:    rgba(212,175,55,0.15);
+
+  /* Text */
+  --text:          #e8e0f0;
+  --text-muted:    #6a6078;
+  --text-gold:     #D4AF37;
+
+  /* Fonts */
+  --font-heading:  'Cinzel', serif;
+  --font-label:    'Barlow Condensed', sans-serif;
+  --font-body:     'Barlow', sans-serif;
+
+  /* Transitions */
+  --transition:    all 0.25s ease;
+}
+
+/* ===================================================
+   RESET & BASE
+=================================================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--bg-root);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Noise texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--gold); text-decoration: none; transition: var(--transition); }
+a:hover { color: var(--text); }
+
+/* ===================================================
+   TYPOGRAPHY
+=================================================== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--text);
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+h2 { font-size: clamp(1.5rem, 3vw, 2.5rem); }
+h3 { font-size: clamp(1.2rem, 2.5vw, 1.8rem); }
+
+.label {
+  font-family: var(--font-label);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ===================================================
+   LAYOUT
+=================================================== */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ===================================================
+   SITE HEADER
+=================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(8,6,8,0.95);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.site-logo {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.site-logo .logo-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--gold);
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.site-nav a {
+  font-family: var(--font-label);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.site-nav a:hover { color: var(--gold); }
+
+.nav-cta {
+  background: var(--gold);
+  color: var(--bg-root) !important;
+  padding: 0.4rem 1rem;
+  font-family: var(--font-label) !important;
+  letter-spacing: 0.1em;
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+.nav-cta:hover {
+  background: var(--gold-dark) !important;
+  color: var(--text) !important;
+}
+
+/* Mobile nav toggle */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .site-nav { display: none; }
+  .nav-toggle { display: block; }
+}
+
+/* ===================================================
+   UNDER CONSTRUCTION PAGE
+=================================================== */
+.page-construction {
+  min-height: calc(100vh - 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ambient background glow */
+.page-construction::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(ellipse at center, rgba(212,175,55,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Decorative corner runes */
+.page-construction::after {
+  content: '◈';
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  font-size: 1.5rem;
+  color: var(--border);
+  opacity: 0.5;
+}
+
+.construction-inner {
+  text-align: center;
+  max-width: 640px;
+  position: relative;
+  z-index: 1;
+}
+
+.construction-rune {
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  color: var(--gold);
+  opacity: 0.15;
+  line-height: 1;
+  margin-bottom: 1rem;
+  animation: pulse-rune 3s ease-in-out infinite;
+}
+
+@keyframes pulse-rune {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.3; }
+}
+
+.construction-eyebrow {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.construction-eyebrow::before,
+.construction-eyebrow::after {
+  content: '';
+  height: 1px;
+  width: 40px;
+  background: linear-gradient(to right, transparent, var(--gold));
+}
+.construction-eyebrow::after {
+  background: linear-gradient(to left, transparent, var(--gold));
+}
+
+.construction-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  color: var(--text);
+  margin-bottom: 1rem;
+  line-height: 1.15;
+}
+
+.construction-title span {
+  color: var(--gold);
+  display: block;
+}
+
+.construction-divider {
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+  margin: 1.5rem auto;
+  position: relative;
+}
+
+.construction-divider::before {
+  content: '◆';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--gold);
+  font-size: 0.5rem;
+  background: var(--bg-root);
+  padding: 0 0.25rem;
+}
+
+.construction-desc {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+
+.construction-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: var(--font-label);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  padding: 0.75rem 2rem;
+  transition: var(--transition);
+}
+
+.construction-cta:hover {
+  background: var(--gold);
+  color: var(--bg-root);
+}
+
+.construction-network {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.construction-network .label {
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.network-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
+}
+
+.network-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 0.75rem 1rem;
+  font-family: var(--font-label);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-align: center;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.network-item:hover {
+  border-color: var(--border-glow);
+  color: var(--gold);
+}
+
+.network-item .dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.4;
+}
+
+/* ===================================================
+   SITE FOOTER
+=================================================== */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.site-footer p {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+
+.site-footer a {
+  color: var(--gold);
+}
+
+/* ===================================================
+   ANIMATIONS
+=================================================== */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease forwards;
+}
+
+.animate-delay-1 { animation-delay: 0.1s; opacity: 0; }
+.animate-delay-2 { animation-delay: 0.2s; opacity: 0; }
+.animate-delay-3 { animation-delay: 0.3s; opacity: 0; }
+.animate-delay-4 { animation-delay: 0.4s; opacity: 0; }
+.animate-delay-5 { animation-delay: 0.5s; opacity: 0; }

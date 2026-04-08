@@ -1,0 +1,85 @@
+# =============================================================
+# D4JSP Multisite .htaccess
+# Handles: WP Multisite rewrites + 301 domain redirects
+# =============================================================
+
+# BEGIN WordPress Multisite
+RewriteEngine On
+RewriteBase /
+
+# 301 Redirects - lesser domains to canonical parents
+RewriteCond %{HTTP_HOST} ^(www\.)?d4mods\.com$ [NC]
+RewriteRule ^(.*)$ https://diablo4mods.com/$1 [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^(www\.)?d4marketplace\.com$ [NC]
+RewriteRule ^(.*)$ https://diablo4marketplace.com/$1 [R=301,L]
+
+# www to non-www canonicalization for all D4 properties
+RewriteCond %{HTTP_HOST} ^www\.diablo4mods\.com$ [NC]
+RewriteRule ^(.*)$ https://diablo4mods.com/$1 [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^www\.diablo4marketplace\.com$ [NC]
+RewriteRule ^(.*)$ https://diablo4marketplace.com/$1 [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^www\.diablo4exploits\.com$ [NC]
+RewriteRule ^(.*)$ https://diablo4exploits.com/$1 [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^www\.diablo4guides\.com$ [NC]
+RewriteRule ^(.*)$ https://diablo4guides.com/$1 [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^www\.diablo4tools\.com$ [NC]
+RewriteRule ^(.*)$ https://diablo4tools.com/$1 [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^www\.diablo4clans\.com$ [NC]
+RewriteRule ^(.*)$ https://diablo4clans.com/$1 [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^www\.diablo4calculator\.com$ [NC]
+RewriteRule ^(.*)$ https://diablo4calculator.com/$1 [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^www\.d4jsp\.org$ [NC]
+RewriteRule ^(.*)$ https://d4jsp.org/$1 [R=301,L]
+
+# WordPress Multisite - Subfolder install rules
+RewriteRule ^index\.php$ - [L]
+
+# uploaded files
+RewriteRule ^([_0-9a-zA-Z-]+/)?files/(.+) wp-includes/ms-files.php?file=$2 [L]
+
+# add a trailing slash to /wp-admin
+RewriteRule ^([_0-9a-zA-Z-]+/)?wp-admin$ $1wp-admin/ [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+RewriteRule ^([_0-9a-zA-Z-]+/)?(wp-(content|admin|includes).*) $2 [L]
+RewriteRule ^([_0-9a-zA-Z-]+/)?(.*\.php)$ $2 [L]
+RewriteRule . index.php [L]
+# END WordPress Multisite
+
+# Security headers
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# Gzip compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/plain text/html text/xml text/css
+  AddOutputFilterByType DEFLATE text/javascript application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml application/xml
+</IfModule>
+
+# Browser caching
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 year"
+</IfModule>
