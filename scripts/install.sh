@@ -62,7 +62,9 @@ wp core multisite-convert --title="$SITE_TITLE"
 
 # Place sunrise.php BEFORE enabling SUNRISE constant
 cp "$(dirname "$0")/sunrise.php" wp-content/sunrise.php
-wp config set SUNRISE 'on' --raw=false --type=constant || wp config set SUNRISE on
+wp config set SUNRISE on --type=constant
+# Force-quote the value (some wp-cli versions write a bareword)
+sed -i "s/define( 'SUNRISE', on );/define( 'SUNRISE', 'on' );/" wp-config.php
 
 # --- 5. Create subsites ---
 echo "[5/8] Creating subsites..."
