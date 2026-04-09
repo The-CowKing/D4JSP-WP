@@ -35,8 +35,6 @@ RewriteRule ^(.*)$ https://diablo4mods.com/$1 [R=301,L]
 RewriteCond %{HTTP_HOST} ^www\.diablo4marketplace\.com$ [NC]
 RewriteRule ^(.*)$ https://diablo4marketplace.com/$1 [R=301,L]
 
-RewriteCond %{HTTP_HOST} ^www\.diablo4exploits\.com$ [NC]
-RewriteRule ^(.*)$ https://diablo4exploits.com/$1 [R=301,L]
 
 RewriteCond %{HTTP_HOST} ^www\.diablo4guides\.com$ [NC]
 RewriteRule ^(.*)$ https://diablo4guides.com/$1 [R=301,L]

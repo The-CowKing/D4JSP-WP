@@ -37,15 +37,7 @@ $copy = [
         'cta'     => 'Trade on D4JSP',
         'cta_url' => 'https://d4jsp.org',
     ],
-    'diablo4exploits.com' => [
-        'rune'    => '⚡',
-        'eyebrow' => 'Bugs & Cheese',
-        'title'   => 'Diablo 4',
-        'sub'     => 'Exploits & Glitches',
-        'desc'    => 'Stay ahead with the latest Diablo 4 exploits, bugs, glitches, and cheese strategies. Updated daily by the D4 community.',
-        'cta'     => 'Visit D4JSP',
-        'cta_url' => 'https://d4jsp.org',
-    ],
+
     'diablo4guides.com' => [
         'rune'    => '📖',
         'eyebrow' => 'Builds & Strategy',

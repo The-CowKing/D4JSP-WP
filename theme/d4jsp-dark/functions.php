@@ -35,15 +35,7 @@ define('D4JSP_NETWORK_SITES', [
         'schema_desc' => 'Diablo4Marketplace.com — buy and sell Diablo 4 items, gold, and services in a trusted player marketplace.',
         'color'       => '#D4AF37',
     ],
-    'diablo4exploits.com' => [
-        'title'       => 'Diablo 4 Exploits - Bugs, Glitches & Cheese Strategies',
-        'description' => 'Latest Diablo 4 exploits, bugs, glitches, and cheese strategies. Stay ahead with the newest D4 tricks and shortcuts.',
-        'keywords'    => 'Diablo 4 exploits, D4 glitches, Diablo 4 bugs, D4 cheese, Diablo 4 tricks, D4 shortcuts',
-        'og_type'     => 'website',
-        'schema_type' => 'WebSite',
-        'schema_desc' => 'Diablo4Exploits.com — discover Diablo 4 exploits, glitches, bugs, and cheese strategies updated regularly.',
-        'color'       => '#D4AF37',
-    ],
+
     'diablo4guides.com' => [
         'title'       => 'Diablo 4 Guides - Builds, Class Guides & Leveling Tips',
         'description' => 'Expert Diablo 4 guides covering all classes, top tier builds, leveling strategies, and endgame content. Master D4 with our guides.',
@@ -259,7 +251,6 @@ function d4jsp_network_sites_list() {
         'd4jsp.org'               => 'D4JSP Trading',
         'diablo4mods.com'         => 'D4 Mods',
         'diablo4marketplace.com'  => 'D4 Marketplace',
-        'diablo4exploits.com'     => 'D4 Exploits',
         'diablo4guides.com'       => 'D4 Guides',
         'diablo4tools.com'        => 'D4 Tools',
         'diablo4clans.com'        => 'D4 Clans',
