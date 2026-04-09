@@ -25,39 +25,29 @@ cd "$WP_ROOT"
 
 # --- 1. Download WordPress ---
 echo "[1/8] Downloading WordPress..."
-wp core download --skip-content
+wp core download --skip-content --force
 
-# --- 2. Create wp-config.php ---
+# --- 2. Create wp-config.php (single-site first; multisite-convert adds the rest) ---
 echo "[2/8] Generating wp-config.php..."
+rm -f wp-config.php
 wp config create \
   --dbname="$DB_NAME" \
   --dbuser="$DB_USER" \
   --dbpass="$DB_PASS" \
   --dbhost="$DB_HOST" \
   --extra-php <<'PHP'
-/* Multisite */
 define('WP_ALLOW_MULTISITE', true);
-define('MULTISITE', true);
-define('SUBDOMAIN_INSTALL', false);
-define('DOMAIN_CURRENT_SITE', 'd4jsp.org');
-define('PATH_CURRENT_SITE', '/');
-define('SITE_ID_CURRENT_SITE', 1);
-define('BLOG_ID_CURRENT_SITE', 1);
-define('SUNRISE', 'on');
-
-/* Performance */
 define('WP_MEMORY_LIMIT', '256M');
 define('WP_MAX_MEMORY_LIMIT', '512M');
 define('COMPRESS_CSS', true);
 define('COMPRESS_SCRIPTS', true);
 define('ENFORCE_GZIP', true);
-
-/* Disable file editing in admin */
 define('DISALLOW_FILE_EDIT', true);
 PHP
 
-# --- 3. Install WordPress core ---
+# --- 3. Install WordPress core (single site) ---
 echo "[3/8] Installing WordPress core..."
+wp db reset --yes
 wp core install \
   --url="$SITE_URL" \
   --title="$SITE_TITLE" \
@@ -66,9 +56,13 @@ wp core install \
   --admin_email="$ADMIN_EMAIL" \
   --skip-email
 
-# --- 4. Convert to Multisite ---
+# --- 4. Convert to Multisite (subdirectory) ---
 echo "[4/8] Converting to Multisite..."
-wp core multisite-convert
+wp core multisite-convert --title="$SITE_TITLE"
+
+# Place sunrise.php BEFORE enabling SUNRISE constant
+cp "$(dirname "$0")/sunrise.php" wp-content/sunrise.php
+wp config set SUNRISE 'on' --raw=false --type=constant || wp config set SUNRISE on
 
 # --- 5. Create subsites ---
 echo "[5/8] Creating subsites..."
