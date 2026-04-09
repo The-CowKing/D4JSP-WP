@@ -3,6 +3,20 @@
 # Handles: WP Multisite rewrites + 301 domain redirects
 # =============================================================
 
+# =============================================================
+# PASSWORD PROTECTION — remove this block when going live
+# =============================================================
+AuthType Basic
+AuthName "D4JSP Network - Private Preview"
+AuthUserFile /home/u704061244/domains/d4jsp.org/public_html/.htpasswd
+Require valid-user
+
+# Allow GitHub Actions deploy webhook through
+SetEnvIf Request_URI "^/wp-cron\.php" no_auth
+SetEnvIf Request_URI "^/wp-admin/admin-ajax\.php" no_auth
+Allow from env=no_auth
+
+# =============================================================
 # BEGIN WordPress Multisite
 RewriteEngine On
 RewriteBase /

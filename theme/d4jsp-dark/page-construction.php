@@ -12,11 +12,11 @@ $sites  = d4jsp_network_sites_list();
 $copy = [
     'd4jsp.org' => [
         'rune'    => '⚔',
-        'eyebrow' => 'The Premier Platform',
-        'title'   => 'Diablo 4',
-        'sub'     => 'Trading Platform',
-        'desc'    => 'D4JSP is the most trusted Diablo 4 player-to-player trading platform. Real-time listings, verified traders, and a reputation system built for serious players.',
-        'cta'     => 'Enter the Trade Hub',
+        'eyebrow' => 'Home of the Forum Troll',
+        'title'   => 'Welcome to',
+        'sub'     => 'D4JSP',
+        'desc'    => 'Instant item identification — no typing. Trade using in-game tooltips with your actual stats. Hunt the Forum Troll for hidden weekly treasure. Custom build trade notifications. Escrow &amp; auction systems. Boss timers, maps, guides, calculators. Discord &amp; Telegram integration. The Yearly Vault Raid — the vault grows. All Diablo titles supported, and beyond.',
+        'cta'     => 'Instant Item Identification — Trade Now',
         'cta_url' => 'https://lawngreen-dinosaur-928580.hostingersite.com',
     ],
     'diablo4mods.com' => [
@@ -111,7 +111,7 @@ get_header();
       <?php echo esc_html($c['desc']); ?>
       <br><br>
       <strong style="color: var(--gold); font-family: var(--font-label); letter-spacing: 0.1em; font-size: 0.85rem;">
-        COMING SOON — FORGING THE REALM
+        INSTANT ITEM IDENTIFICATION — NO TYPING. TRADING WITH IN-GAME TOOLTIPS &amp; YOUR STATS.
       </strong>
     </p>
 
