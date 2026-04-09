@@ -17,7 +17,7 @@ $copy = [
         'sub'     => 'Trading Platform',
         'desc'    => 'D4JSP is the most trusted Diablo 4 player-to-player trading platform. Real-time listings, verified traders, and a reputation system built for serious players.',
         'cta'     => 'Enter the Trade Hub',
-        'cta_url' => 'https://d4jsp.org/app',
+        'cta_url' => 'https://lawngreen-dinosaur-928580.hostingersite.com',
     ],
     'diablo4mods.com' => [
         'rune'    => '🔧',

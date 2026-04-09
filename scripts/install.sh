@@ -6,14 +6,14 @@
 
 set -e
 
-WP_ROOT="/home/u704061244/domains/d4jsp.org/public_html"
-DB_NAME="u704061244_d4jsp_wp"
-DB_USER="u704061244_adam"
-DB_PASS='fcerf22321@224E1X@@#'
+WP_ROOT=""          # REQUIRED: run 'echo $HOME' via SSH then append /domains/d4jsp.org/public_html
+DB_NAME=""          # REQUIRED: create in Hostinger panel → Databases → MySQL, paste name here
+DB_USER=""          # REQUIRED: MySQL username from Hostinger panel
+DB_PASS=""          # REQUIRED: MySQL password from Hostinger panel
 DB_HOST="localhost"
 ADMIN_EMAIL="adam87lewis@gmail.com"
 ADMIN_USER="cowking"
-ADMIN_PASS='D4jsp!Cw9k$mGv2Xq7Lp'
+ADMIN_PASS=""       # REQUIRED: set a strong wp-admin password
 SITE_URL="https://d4jsp.org"
 SITE_TITLE="D4JSP - Diablo 4 Trading Platform"
 # Server info (for reference)
@@ -25,29 +25,39 @@ cd "$WP_ROOT"
 
 # --- 1. Download WordPress ---
 echo "[1/8] Downloading WordPress..."
-wp core download --skip-content --force
+wp core download --skip-content
 
-# --- 2. Create wp-config.php (single-site first; multisite-convert adds the rest) ---
+# --- 2. Create wp-config.php ---
 echo "[2/8] Generating wp-config.php..."
-rm -f wp-config.php
 wp config create \
   --dbname="$DB_NAME" \
   --dbuser="$DB_USER" \
   --dbpass="$DB_PASS" \
   --dbhost="$DB_HOST" \
   --extra-php <<'PHP'
+/* Multisite */
 define('WP_ALLOW_MULTISITE', true);
+define('MULTISITE', true);
+define('SUBDOMAIN_INSTALL', false);
+define('DOMAIN_CURRENT_SITE', 'd4jsp.org');
+define('PATH_CURRENT_SITE', '/');
+define('SITE_ID_CURRENT_SITE', 1);
+define('BLOG_ID_CURRENT_SITE', 1);
+define('SUNRISE', 'on');
+
+/* Performance */
 define('WP_MEMORY_LIMIT', '256M');
 define('WP_MAX_MEMORY_LIMIT', '512M');
 define('COMPRESS_CSS', true);
 define('COMPRESS_SCRIPTS', true);
 define('ENFORCE_GZIP', true);
+
+/* Disable file editing in admin */
 define('DISALLOW_FILE_EDIT', true);
 PHP
 
-# --- 3. Install WordPress core (single site) ---
+# --- 3. Install WordPress core ---
 echo "[3/8] Installing WordPress core..."
-wp db reset --yes
 wp core install \
   --url="$SITE_URL" \
   --title="$SITE_TITLE" \
@@ -56,15 +66,9 @@ wp core install \
   --admin_email="$ADMIN_EMAIL" \
   --skip-email
 
-# --- 4. Convert to Multisite (subdirectory) ---
+# --- 4. Convert to Multisite ---
 echo "[4/8] Converting to Multisite..."
-wp core multisite-convert --title="$SITE_TITLE"
-
-# Place sunrise.php BEFORE enabling SUNRISE constant
-cp "$(dirname "$0")/sunrise.php" wp-content/sunrise.php
-wp config set SUNRISE on --type=constant
-# Force-quote the value (some wp-cli versions write a bareword)
-sed -i "s/define( 'SUNRISE', on );/define( 'SUNRISE', 'on' );/" wp-config.php
+wp core multisite-convert
 
 # --- 5. Create subsites ---
 echo "[5/8] Creating subsites..."

@@ -24,7 +24,7 @@
         'fallback_cb'    => false,
       ]);
       ?>
-      <a href="https://d4jsp.org" class="nav-cta" <?php if (strpos(home_url(), 'd4jsp.org') === false): ?>target="_blank" rel="noopener"<?php endif; ?>>
+      <a href="https://lawngreen-dinosaur-928580.hostingersite.com" class="nav-cta" target="_blank" rel="noopener">>
         Trade Now
       </a>
     </nav>
