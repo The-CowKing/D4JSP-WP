@@ -10,7 +10,7 @@
 
 <header class="site-header" role="banner">
   <div class="container">
-    <a href="<?php echo esc_url(home_url('/')); ?>" class="site-logo" aria-label="<?php bloginfo('name'); ?>">
+    <a href="https://trade.d4jsp.org" class="site-logo" aria-label="<?php bloginfo('name'); ?>">
       <span class="logo-dot" aria-hidden="true"></span>
       <?php bloginfo('name'); ?>
     </a>
@@ -24,7 +24,7 @@
         'fallback_cb'    => false,
       ]);
       ?>
-      <a href="https://lawngreen-dinosaur-928580.hostingersite.com" class="nav-cta" target="_blank" rel="noopener">>
+      <a href="https://trade.d4jsp.org" class="nav-cta" target="_blank" rel="noopener">
         Trade Now
       </a>
     </nav>
